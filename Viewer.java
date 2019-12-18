@@ -19,7 +19,8 @@ public class Viewer extends JFrame {
         g.translate(getWidth()/2, getHeight()/2);
         g.drawLine(0,-getHeight(),0,getHeight());
         g.drawLine(-getWidth(),0,getWidth(),0);
-        c1.draw(g2d);
+       // c1.draw(g2d);
+        c1.perpdraw(g2d);
     }
 
 

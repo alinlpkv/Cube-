@@ -34,8 +34,8 @@ public class Main {
         f.outFacet(); */
         Cube c= new Cube();
         c.scale(100);
-       c.translate(-50,-50,-50);
-        c.rotateCube(100,70,15);
+        c.translate(-50,-50,-50);
+        c.rotateCube(30,45,85);
         Viewer v= new Viewer(c);
         //c.translate(50,70,70);
     }
