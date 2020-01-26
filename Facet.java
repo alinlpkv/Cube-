@@ -25,7 +25,7 @@ public class Facet {
 
      public void rotate(double ux,double uy,double uz){
          for (int i = 0; i< vertex.length; i++){
-             vertex[i].rotateXYZ(vertex[i], ux,uy,uz);
+             vertex[i].rotateXYZ(ux,uy,uz);
          }
      }
 
@@ -48,6 +48,19 @@ public class Facet {
         return c.getZ();
     }
 
+
+    public double normalt(){
+        double c= 200;
+        double t0=-c/(vertex[0].getZ()-c);
+        double t1=-c/(vertex[1].getZ()-c);
+        double t2=-c/(vertex[2].getZ()-c);
+        double t3=-c/(vertex[3].getZ()-c);
+        R3Vector a= new R3Vector(t0*vertex[0].getX() - t1*vertex[1].getX(), t0*vertex[0].getY() - t1*vertex[1].getY(), t0*vertex[0].getZ() - t1*vertex[1].getZ());
+        R3Vector b=new R3Vector(t2*vertex[2].getX() - t1*vertex[1].getX(), t2*vertex[2].getY() - t1*vertex[1].getY(), t2*vertex[2].getZ() - t1*vertex[1].getZ());
+        R3Vector m= a.vectorProduct(a,b);
+        return m.getZ();
+    }
+
     public void draw(Graphics2D g){
          for(int i=0; i<vertex.length;i++){
              Path2D p= new Path2D.Double();
@@ -66,13 +79,13 @@ public class Facet {
         double c= 200;
         for(int i=0; i<vertex.length;i++){
             double t0=-c/(vertex[0].getZ()-c);
-           double t1=-c/(vertex[1].getZ()-c);
+            double t1=-c/(vertex[1].getZ()-c);
             double t2=-c/(vertex[2].getZ()-c);
             double t3=-c/(vertex[3].getZ()-c);
-//            double t0=c/(c-vertex[0].getZ());
-//            double t1=c/(c-vertex[1].getZ());
-//            double t2=c/(c-vertex[2].getZ());
-//            double t3=c/(c-vertex[3].getZ());
+//            double t0=(vertex[0].getZ()-c)/-c;
+//            double t1=(vertex[1].getZ()-c)/-c;
+//            double t2=(vertex[2].getZ()-c)/-c;
+//            double t3=(vertex[3].getZ()-c)/-c;
             Path2D p= new Path2D.Double();
             p.moveTo(t0*vertex[0].getX(),t0*vertex[0].getY());
             p.lineTo(t1*vertex[1].getX(),t1*vertex[1].getY());

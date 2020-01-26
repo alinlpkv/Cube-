@@ -1,42 +1,94 @@
-public class Main {
+import java.awt.*;
 
-    public static void  main(String[] args) {
-        R3Vector a = new R3Vector(10, 10, 10);
-        R3Vector b = new R3Vector(10, 10, 10);
-        a.out();
-       //b.out();
-       // R3Vector c= R3Vector.sum(a,b);
-        //c.out();
-        //a.sum(a).sum(a).out();
-        //a.scale(5);
-        //a.out();
-        //a.translate(1,2,-3);
-       // a.out();
-      //  a.scalar(a,b);
-       // a.vector(a,b).out();
-     /*   a.rotateX(a,90);
-        a.out();
-        a.rotateY(a,90);
-        a.out();
-        a.rotateZ(a,90);
-        a.out();
-        b.rotateXYZ(b, 90,90,90 ).out();
-        Facet f= new Facet(new R3Vector(0,0,0),new R3Vector(0,1,0),new R3Vector(1,1,0),new R3Vector(1,0,0));
-        f.outFacet();
-        f.rotate(0,0,90);
-        System.out.println(" ");
-        f.outFacet();
-        System.out.println(" ");
-        f.scale(5);
-        f.outFacet();
-        System.out.println(" ");
-        f.translate(1,2,-3);
-        f.outFacet(); */
+import javax.swing.JFrame;
+
+public class Main extends JFrame {
+
+    public Main(){
+        this.setSize(1000,1000);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("Кубик");
+        Container pane = this.getContentPane();
+        pane.setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.CENTER;
+
         Cube c= new Cube();
-        c.scale(100);
-        c.translate(-50,-50,-50);
-        c.rotateCube(30,45,85);
+
+     //   c.rotateCube(-45,-45,-45);
         Viewer v= new Viewer(c);
-        //c.translate(50,70,70);
+
+        MyPanel text= new MyPanel();
+        constraints.weightx   = 0.05;
+        constraints.weighty   = 0.02;
+        constraints.gridx     = 2;
+        constraints.gridy     = 0;
+        add(text, constraints);
+
+
+      //  v.setValueZ(Integer.parseInt(text.getText()));
+        Degree d=new Degree();
+        MyButtonDegree b = new MyButtonDegree(c, v, text,d);
+        constraints.weightx   = 0.05;
+        constraints.weighty   = 0.02;
+        constraints.gridx     = 2;
+        constraints.gridy     = 1;
+        add(b, constraints);
+
+        MyButtonDegree b1 = new MyButtonDegree(c, v, text,d);
+        constraints.weightx   = 0.05;
+        constraints.weighty   = 0.02;
+        constraints.gridx     = 2;
+        constraints.gridy     = 2;
+        add(b1, constraints);
+
+        MyButton button = new MyButton(c, v);
+        constraints.weightx   = 0.4;
+      //  constraints.weighty   = 0.05;
+        constraints.gridx     = 0;
+        constraints.gridy     = 0;
+        constraints.gridheight =3;
+        add(button, constraints);
+
+        MyButton button1 = new MyButton(c,v);
+        constraints.weightx   = 0.4;
+      //  constraints.weighty   = 0.05;
+        constraints.gridx     = 1;
+        constraints.gridy     = 0;
+        constraints.gridheight =3;
+        add(button1, constraints);
+
+
+       // constraints.weightx   = 0;
+        constraints.weighty   = 0.7;
+        constraints.gridx     = 0;
+        constraints.gridy     = 3;
+        constraints.gridwidth = 3;
+        add(v, constraints);
+
+        MyScroll scrollX = new MyScroll(Scrollbar.HORIZONTAL, 0, -360,360, c,v);
+        //constraints.weightx   = 1;
+        constraints.weighty   = 0.01;
+        constraints.gridx     = 0;
+        constraints.gridy     = 6;
+        constraints.gridwidth= 3;
+        constraints.gridheight =0;
+        add(scrollX, constraints);
+
+        MyScroll scrollY = new MyScroll(Scrollbar.VERTICAL, 0, -360,360, c,v);
+        constraints.weightx   = 0.035;
+        constraints.weighty   = 0.9;
+        constraints.gridx     = 3;
+        constraints.gridy     = 0;
+        constraints.gridheight =6;
+        add(scrollY, constraints);
+
+        this.setVisible(true);
     }
+
+    public static void  main(String[] args) { new Main();
+    }
+
 }
+

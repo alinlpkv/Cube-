@@ -51,7 +51,7 @@ public class Cube {
    public void perpdraw(Graphics2D g){
        for(int i=0;i<facets.length;i++){
            //если повернуто лицом то рисуется
-           if ( facets[i].normal() > 0) {
+           if ( facets[i].normalt() > 0) {
                facets[i].perpdraw(g);
                System.out.println("координата z "+ facets[i].normal()+" грань "+i);
           }
